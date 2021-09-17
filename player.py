@@ -15,15 +15,20 @@ class AI:
     def control(self, sqs_given: squares.Squares, status: functions.Status):
         if sqs_given.curr_sq == sqs_given.st.new:
             self.direction = make_choice(sqs_given)
+            # print(self.direction, type(self.direction))
             # self.direction = {'all_pos': [[17, 0], [16, 0], [15, 0], [18, 0]], 'center': [17, 0],
             # 'rotate': 1, 'mark': 22.4875}
             # type(self.direction) = <class 'dict'>
-            print(self.direction, type(self.direction))
         else:
             move(sqs_given, self.direction, status)
 
 
-def move(sqs_given, direction, status):
+"""
+direction = {'all_pos': [[17, 0], [16, 0], [15, 0], [18, 0]], 'center': [17, 0], 'rotate': 1, 'mark': 22.4875}
+"""
+
+
+def move(sqs_given: squares.Squares, direction, status: functions.Status):
     # rotation
     if sqs_given.rotate_curr != direction['rotate']:
         status.rotate = True
@@ -46,7 +51,7 @@ def move(sqs_given, direction, status):
         status.down = False
 
 
-def make_choice(sqs_given):
+def make_choice(sqs_given: squares.Squares):
     '''return one direction to go'''
     sqs = copy_sqs(sqs_given)
     pos_data = get_all_possible_pos(sqs)
@@ -97,7 +102,7 @@ def get_end_pos_with_rotate(pos, sqs):
 
 
 def copy_sqs(sqs):
-    '''this copies sqs safely'''
+    """this copies sqs safely"""
     sqs_copy = copy(sqs)
     sqs_copy.squares = deepcopy(sqs.squares)
     sqs_copy.curr_sq = deepcopy(sqs.curr_sq)

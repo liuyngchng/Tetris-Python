@@ -10,8 +10,16 @@ class Squares:
         self.st = st
         self.status = status
         self.screen = screen
-        self.empty_line = ['none' for i in range(st.square_num_x)]
-        self.squares = [self.empty_line.copy() for i in range(st.square_num_y)]
+        self.empty_line = ['none' for i in range(st.square_num_x)]                  # 单行数据字典初始化
+        # print("self.empty_line")
+        # print(self.empty_line)
+        # ['none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none']
+        self.squares = [self.empty_line.copy() for i in range(st.square_num_y)]     # x*y 矩阵二维数据字典初始化
+        # print("self.squares")
+        # print(self.squares)
+        # [['none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none'],
+        # …………，共20行
+        # ['none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none']]
         self.new_sq(self)
         self.clock = Clock(st)
 
