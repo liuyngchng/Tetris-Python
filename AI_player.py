@@ -5,17 +5,19 @@ from copy import copy, deepcopy
 from numpy import array, mean
 from random import choice
 
+
 class AI:
     def __init__(self):
         self.direction = None
 
     def control(self, sqs_given, status):
-        #print("test:")
-        #print(sqs_given)
+        # print("test:")
+        # print(sqs_given)
         if sqs_given.curr_sq == sqs_given.st.new:
             self.direction = make_choice(sqs_given)
         else:
             move(sqs_given, self.direction, status)
+
 
 def move(sqs_given, direction, status):
     # rotation
@@ -39,6 +41,7 @@ def move(sqs_given, direction, status):
     else:
         status.down = False
 
+
 def make_choice(sqs_given):
     '''return one direction to go'''
     sqs = copy_sqs(sqs_given)
@@ -47,10 +50,11 @@ def make_choice(sqs_given):
     all_highest = get_all_highest(pos_data)
     return choice(all_highest)
 
+
 def get_all_highest(pos_data):
     '''highest marks might not be distinct, so return all of them'''
     # find highest mark
-    highest_key = lambda dict:dict['mark']
+    highest_key = lambda dict: dict['mark']
     max_data = max(pos_data, key=highest_key)
     max_mark = max_data['mark']
     # get all data with this mark
@@ -75,6 +79,7 @@ def get_all_possible_pos(sqs_given):
         get_end_pos_with_rotate(pos, sqs)
     return pos
 
+
 def get_end_pos_with_rotate(pos, sqs):
     move_sq_to_left(sqs)
     old_sq = None
@@ -86,6 +91,7 @@ def get_end_pos_with_rotate(pos, sqs):
         old_sq = sqs.curr_sq
         sqs.right(sqs)
 
+
 def copy_sqs(sqs):
     '''this copies sqs safely'''
     sqs_copy = copy(sqs)
@@ -94,11 +100,13 @@ def copy_sqs(sqs):
     sqs_copy.curr_shape = deepcopy(sqs.curr_shape)
     return sqs_copy
 
+
 def move_sq_to_left(sqs):
     old_sq = None
     while old_sq != sqs.curr_sq:
         old_sq = sqs.curr_sq
         sqs.left(sqs)
+
 
 def record_curr_pos(pos, sqs):
     '''record all active squares'''
@@ -107,8 +115,9 @@ def record_curr_pos(pos, sqs):
     x = sqs.curr_sq[1]
     all_pos.append([y, x])
     for sq in sqs.curr_shape:
-        all_pos.append([y+sq[0], x+sq[1]])
-    pos.append({'all_pos':all_pos, 'center':sqs.curr_sq, 'rotate':sqs.rotate_curr})
+        all_pos.append([y + sq[0], x + sq[1]])
+    pos.append({'all_pos': all_pos, 'center': sqs.curr_sq, 'rotate': sqs.rotate_curr})
+
 
 def evaluate_full_situation(sqs, positions):
     for pos_data in positions:
@@ -116,6 +125,7 @@ def evaluate_full_situation(sqs, positions):
         sqs_curr = copy_sqs(sqs)
         map_pos_to_sqs(sqs_curr, pos)
         pos_data['mark'] = evaluate_situation(sqs_curr)
+
 
 def evaluate_situation(sqs):
     full_lines = evaluate_full_lines(sqs)
@@ -125,6 +135,7 @@ def evaluate_situation(sqs):
     lowest_column, average_column, absolute_diff = evaluate_column(squares)
     return evaluate_mark(full_lines, hidden_squares, lowest_column, average_column, absolute_diff)
 
+
 def evaluate_full_lines(sqs_given):
     sqs = copy_sqs(sqs_given)
     full_lines = 0
@@ -132,6 +143,7 @@ def evaluate_full_lines(sqs_given):
         if line.count('none') == 0:
             full_lines += 1
     return full_lines
+
 
 def evaluate_hidden_squares(squares):
     '''find the number of non-squares under squares'''
@@ -150,6 +162,7 @@ def evaluate_hidden_squares(squares):
                 hidden_squares += 1
     return hidden_squares
 
+
 def evaluate_column(squares):
     '''count lowest and average space left in every column'''
     space_left = []
@@ -163,7 +176,8 @@ def evaluate_column(squares):
                 break
         if not appended:
             space_left.append(len(column))
-    return (min(space_left), mean(space_left), max(space_left)-min(space_left))
+    return (min(space_left), mean(space_left), max(space_left) - min(space_left))
+
 
 def evaluate_mark(full_lines, hidden_squares, lowest_column, average_column, absolute_diff):
     # weights, set manually
@@ -179,6 +193,7 @@ def evaluate_mark(full_lines, hidden_squares, lowest_column, average_column, abs
     mark += average_column * average_column_weight
     mark += absolute_diff * absolute_diff_weight
     return mark
+
 
 def map_pos_to_sqs(sqs, positions):
     for pos in positions:

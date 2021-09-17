@@ -49,7 +49,7 @@ class Clock:
         self.last_straight_drop = process_time()
 
     def is_time_to_drop(self):
-        return ((process_time() - self.last_drop) > self.st.time_drop)
+        return (process_time() - self.last_drop) > self.st.time_drop
 
     def is_time_to_quick_drop(self):
         return ((process_time() - self.last_quick_drop) > self.st.time_quick_drop) and \

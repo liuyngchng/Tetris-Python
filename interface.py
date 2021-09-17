@@ -19,4 +19,4 @@ def get_center_pos(screen, text):
     text_rect = text.get_rect()
     text_rect.centerx = screen_rect.centerx
     text_rect.centery = screen_rect.centery
-    return (text_rect.x, text_rect.y)
+    return text_rect.x, text_rect.y
