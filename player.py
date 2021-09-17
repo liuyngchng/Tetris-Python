@@ -74,7 +74,7 @@ def get_all_highest(pos_data):
     return all_highest
 
 
-def get_all_possible_pos(sqs_given):
+def get_all_possible_pos(sqs_given: squares.Squares):
     # copy given sqs for safety
     sqs_origin = copy_sqs(sqs_given)
     # reset rotation
@@ -101,7 +101,7 @@ def get_end_pos_with_rotate(pos, sqs):
         sqs.right(sqs)
 
 
-def copy_sqs(sqs):
+def copy_sqs(sqs: squares.Squares):
     """this copies sqs safely"""
     sqs_copy = copy(sqs)
     sqs_copy.squares = deepcopy(sqs.squares)
