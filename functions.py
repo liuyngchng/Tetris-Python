@@ -19,7 +19,9 @@ class Functions:
                 self.st.score_size -= self.st.score_font_adjust
         self.screen.blit(surface, self.st.score_pos)
 
-
+'''
+获取当前游戏状态的包
+'''
 class Status:
     def __init__(self):
         # some numbers

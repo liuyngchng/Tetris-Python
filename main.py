@@ -9,6 +9,7 @@ import AI_player
 def game_start():
     # initialisations
     pygame.init()
+    # 描述游戏状态的类
     status = functions.Status()
     st = Settings()
 
@@ -38,7 +39,7 @@ def game_start():
             st = Settings()
             if AI_mode:
                 status.AI = True
-                sqs.st.adjust_for_AI()
+                sqs.st.adjust_for_ai()
         else:
             raise RuntimeError  # this should never happen
 

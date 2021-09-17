@@ -44,21 +44,25 @@ class Settings:
             {'pos': ([-1, -1], [0, -1], [0, 1]), 'color': 'cyan', 'rotate': 4},  # |__
             {'pos': ([-1, 1], [0, -1], [0, 1]), 'color': 'white', 'rotate': 4}  # --|
         )
-        self.shape_num = len(self.shapes)
+
+        self.shape_num = len(self.shapes)               # 下落图形的数量
 
         # positions
-        self.square_length = 30
-        self.square_num_x = 12
-        self.square_num_y = 20
-        self.square_space = 5
-        self.new = [1, int(self.square_num_x / 2)]  # upper center
+        self.square_num_x = 12                          # 屏幕宽度的方格数
+        self.square_num_y = 20                          # 屏幕高度的方格数
+        self.square_length = 30                         # 游戏区每个小方格的边长
+        self.square_space = 5                           # 游戏区小方格和小方格之间的空隙
+
+        # 新出现的形状所在位置坐标
+        self.new = [1, int(self.square_num_x / 2)]      # upper center
 
         # surfaces
-        self.func_width = 300
-        self.game_size = self.get_game_size(self)
-        self.func_size = self.get_func_size(self)
-        self.screen_size = self.get_screen_size(self)
-        self.screen_name = "Tetris by Bofei Wang"
+        self.func_width = 300                           # 游戏右侧功能区的宽度（像素数）
+        self.game_size = self.get_game_size(self)       # 游戏区的长宽尺寸
+        self.func_size = self.get_func_size(self)       # 游戏右侧功能区的长宽尺寸
+
+        self.screen_size = self.get_screen_size(self)   # 整个屏幕区的尺寸
+        self.screen_name = "Tetris by Richard Liu"      # 屏幕上方的文字标题
 
         # texts
         self.text_margin = 10
@@ -84,7 +88,7 @@ class Settings:
         self.game_over_pos = "center"
         self.game_over_surface = self.adjust_game_over_size(self)
 
-    def adjust_for_AI(self):
+    def adjust_for_ai(self):
         self.time_drop = 0  # period to force drop
         self.time_drop_adjust = 0  # every score up, decrease drop time by this factor
         self.time_stop = 0  # time player can adjust pos at bottom
@@ -93,27 +97,38 @@ class Settings:
         self.time_before_drop = 0  # time to wait from one stop to drop
         self.time_quick_drop = 0  # minimum time interval to drop in quick mode
         self.time_move_quick = 0  # minimum time interval to move in quick mode
-        self.screen_name = 'Tetris by Bofei Wang, AI playing...'
+        self.screen_name = 'Tetris by Richard Liu, AI playing...'
+
+    '''
+    获取游戏区的像素尺寸，包括长和宽
+    '''
 
     @staticmethod
     def get_game_size(self):
+        # 游戏区x轴的像素数
         x = ((self.square_length + self.square_space) \
              * self.square_num_x) + self.square_space
+        # 游戏区y轴的像素数
         y = ((self.square_length + self.square_space) \
              * self.square_num_y) + self.square_space
-        return (x, y)
+        return x, y
+
+    '''
+    获取功能区的尺寸，包括长和宽
+    '''
 
     @staticmethod
     def get_func_size(self):
         x = self.func_width
         y = self.game_size[1]
-        return (x, y)
+        return x, y
 
     @staticmethod
     def get_screen_size(self):
+
         x = self.game_size[0] + self.func_size[0]
         y = self.game_size[1]
-        return (x, y)
+        return x, y
 
     @staticmethod
     def adjust_start_size(self):

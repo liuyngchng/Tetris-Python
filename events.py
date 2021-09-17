@@ -39,7 +39,7 @@ def key_down(sqs, key, status):
     if key == pygame.K_a:
         status.AI = True
         status.new_AI = True
-        sqs.st.adjust_for_AI()
+        sqs.st.adjust_for_ai()
 
 
 # deal with keys that are released
