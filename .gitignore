@@ -1,0 +1,9 @@
+.idea
+*.pyc
+*.xml
+*.iml
+*.sqlite
+*.sqlite-journal
+ProjectSettings.json
+.suo
+venv/*
