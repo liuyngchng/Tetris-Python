@@ -4,17 +4,21 @@ This controls games key and aims to get a high score
 from copy import copy, deepcopy
 from numpy import array, mean
 from random import choice
+import functions
+import squares
 
 
 class AI:
     def __init__(self):
         self.direction = None
 
-    def control(self, sqs_given, status):
-        # print("test:")
-        # print(sqs_given)
+    def control(self, sqs_given: squares.Squares, status: functions.Status):
         if sqs_given.curr_sq == sqs_given.st.new:
             self.direction = make_choice(sqs_given)
+            # self.direction = {'all_pos': [[17, 0], [16, 0], [15, 0], [18, 0]], 'center': [17, 0],
+            # 'rotate': 1, 'mark': 22.4875}
+            # type(self.direction) = <class 'dict'>
+            print(self.direction, type(self.direction))
         else:
             move(sqs_given, self.direction, status)
 
@@ -176,7 +180,7 @@ def evaluate_column(squares):
                 break
         if not appended:
             space_left.append(len(column))
-    return (min(space_left), mean(space_left), max(space_left) - min(space_left))
+    return min(space_left), mean(space_left), max(space_left) - min(space_left)
 
 
 def evaluate_mark(full_lines, hidden_squares, lowest_column, average_column, absolute_diff):

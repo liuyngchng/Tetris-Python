@@ -1,9 +1,16 @@
 import pygame
+import functions
+import squares
+import player
 from sys import exit
+
+"""
+处理 pygame 中的事件
+"""
 
 
 # listen to every event and respond
-def check_events(sqs, status, AI):
+def check_events(sqs: squares.Squares, status: functions.Status, ai: player.AI):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             exit()
@@ -11,8 +18,8 @@ def check_events(sqs, status, AI):
             key_down(sqs, event.key, status)
         if event.type == pygame.KEYUP:
             key_up(event.key, status)
-    if status.is_AI():
-        AI.control(sqs, status)
+    if status.is_ai():
+        ai.control(sqs, status)
 
 
 # deal with keys that are pressed down

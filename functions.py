@@ -2,13 +2,15 @@ import pygame
 
 
 class Functions:
+    """游戏区右侧的功能区"""
+
     def __init__(self, st, screen):
         self.st = st
         self.screen = screen
 
     def show_score(self, score):
         surface = None
-        adjust = True  # at least calculate surface once
+        adjust = True                       # at least calculate surface once
         while adjust:
             text = self.st.score + str(score)
             font = pygame.font.SysFont(self.st.score_font, self.st.score_size)
@@ -19,10 +21,10 @@ class Functions:
                 self.st.score_size -= self.st.score_font_adjust
         self.screen.blit(surface, self.st.score_pos)
 
-'''
-获取当前游戏状态的包
-'''
+
 class Status:
+    """获取当前游戏状态的类"""
+
     def __init__(self):
         # some numbers
         self.GAMEOVER = 0x0
@@ -46,8 +48,8 @@ class Status:
     def is_game_renew(self):
         return self.game_status == self.RENEW
 
-    def is_AI(self):
-        return self.AI
+    def is_ai(self):
+        return self.ai
 
     def refresh(self):
         self.left = False
@@ -55,7 +57,7 @@ class Status:
         self.down = False
         self.rotate = False
         self.straight_drop = False
-        self.AI = False
+        self.ai = False             # 是否人工智能
 
         # score status
         self.score = 0

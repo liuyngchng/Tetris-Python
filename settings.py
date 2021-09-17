@@ -132,7 +132,7 @@ class Settings:
 
     @staticmethod
     def adjust_start_size(self):
-        adjust = True  # at least calculate surface once
+        adjust = True                               # at least calculate surface once
         while adjust:
             font = pygame.font.SysFont(self.start_font, self.start_size)
             surface = font.render(self.start, True, self.start_color)
@@ -145,7 +145,7 @@ class Settings:
 
     @staticmethod
     def adjust_game_over_size(self):
-        adjust = True  # at least calculate surface once
+        adjust = True                               # at least calculate surface once
         while adjust:
             font = pygame.font.SysFont(self.game_over_font, self.game_over_size)
             surface = font.render(self.game_over, True, self.game_over_color)
