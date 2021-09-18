@@ -4,15 +4,15 @@ This controls games key and aims to get a high score
 from copy import copy, deepcopy
 from numpy import array, mean
 from random import choice
-import functions
-import squares
+from functions import Status
+from squares import Squares
 
 
 class AI:
     def __init__(self):
         self.direction = None
 
-    def control(self, sqs_given: squares.Squares, status: functions.Status):
+    def control(self, sqs_given: Squares, status: Status):
         if sqs_given.curr_sq == sqs_given.st.new:
             self.direction = make_choice(sqs_given)
             # print(self.direction, type(self.direction))
@@ -28,7 +28,7 @@ direction = {'all_pos': [[17, 0], [16, 0], [15, 0], [18, 0]], 'center': [17, 0],
 """
 
 
-def move(sqs_given: squares.Squares, direction, status: functions.Status):
+def move(sqs_given: Squares, direction, status: Status):
     # rotation
     if sqs_given.rotate_curr != direction['rotate']:
         status.rotate = True
@@ -51,7 +51,7 @@ def move(sqs_given: squares.Squares, direction, status: functions.Status):
         status.down = False
 
 
-def make_choice(sqs_given: squares.Squares):
+def make_choice(sqs_given: Squares):
     '''return one direction to go'''
     sqs = copy_sqs(sqs_given)
     pos_data = get_all_possible_pos(sqs)
@@ -74,7 +74,7 @@ def get_all_highest(pos_data):
     return all_highest
 
 
-def get_all_possible_pos(sqs_given: squares.Squares):
+def get_all_possible_pos(sqs_given: Squares):
     # copy given sqs for safety
     sqs_origin = copy_sqs(sqs_given)
     # reset rotation
@@ -101,7 +101,7 @@ def get_end_pos_with_rotate(pos, sqs):
         sqs.right(sqs)
 
 
-def copy_sqs(sqs: squares.Squares):
+def copy_sqs(sqs: Squares):
     """this copies sqs safely"""
     sqs_copy = copy(sqs)
     sqs_copy.squares = deepcopy(sqs.squares)
