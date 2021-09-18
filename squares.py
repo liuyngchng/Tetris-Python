@@ -73,7 +73,7 @@ class Squares:
     # renew current square
     @staticmethod
     def new_sq(self):
-        self.curr_sq = self.st.new.copy()
+        self.curr_sq = self.st.new.copy()           # 当前的shape
         shape = self.get_shape(self)
         self.origin_shape = shape['pos']
         self.curr_shape = shape['pos']
