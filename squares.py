@@ -14,7 +14,7 @@ class Squares:
         # print("self.empty_line")
         # print(self.empty_line)
         # ['none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none']
-        self.squares = [self.empty_line.copy() for i in range(st.square_num_y)]     # x*y 矩阵二维数据字典初始化
+        self.squares = [self.empty_line.copy() for i in range(st.square_num_y)]     # x*y 矩阵二维数据list初始化
         # print("self.squares")
         # print(self.squares)
         # [['none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none'],

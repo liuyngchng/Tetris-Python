@@ -51,17 +51,18 @@ def move(sqs_given: Squares, direction, status: Status):
         status.down = False
 
 
-def make_choice(sqs_given: Squares):
-    '''return one direction to go'''
+def make_choice(sqs_given: Squares) -> dict:
+    """return one direction to go"""
     sqs = copy_sqs(sqs_given)
     pos_data = get_all_possible_pos(sqs)
+    print('make_choice_pos_data:', pos_data)
     evaluate_full_situation(sqs, pos_data)
     all_highest = get_all_highest(pos_data)
     return choice(all_highest)
 
 
-def get_all_highest(pos_data):
-    '''highest marks might not be distinct, so return all of them'''
+def get_all_highest(pos_data) -> list:
+    """highest marks might not be distinct, so return all of them"""
     # find highest mark
     highest_key = lambda dict: dict['mark']
     max_data = max(pos_data, key=highest_key)
@@ -118,7 +119,7 @@ def move_sq_to_left(sqs):
 
 
 def record_curr_pos(pos, sqs):
-    '''record all active squares'''
+    """record all active squares"""
     all_pos = []
     y = sqs.curr_sq[0]
     x = sqs.curr_sq[1]
@@ -155,7 +156,7 @@ def evaluate_full_lines(sqs_given):
 
 
 def evaluate_hidden_squares(squares):
-    '''find the number of non-squares under squares'''
+    """find the number of non-squares under squares"""
     hidden_squares = 0
     for colomn in squares:
         found_first_sq = False
@@ -173,7 +174,7 @@ def evaluate_hidden_squares(squares):
 
 
 def evaluate_column(squares):
-    '''count lowest and average space left in every column'''
+    """count lowest and average space left in every column"""
     space_left = []
     for column in squares:
         appended = False
@@ -204,6 +205,11 @@ def evaluate_mark(full_lines, hidden_squares, lowest_column, average_column, abs
     return mark
 
 
-def map_pos_to_sqs(sqs, positions):
+def map_pos_to_sqs(sqs: Squares, positions: list):
+    # <squares.Squares object>, [[16, 6], [15, 6], [16, 5], [15, 7]]
     for pos in positions:
+        """
+        将二维矩阵中的某个元素的值设置为'map'
+        [['none','map',... 'yellow', 'yellow'],...]
+        """
         sqs.squares[pos[0]][pos[1]] = 'map'
