@@ -55,7 +55,7 @@ def make_choice(sqs_given: Squares) -> dict:
     """return one direction to go"""
     sqs = copy_sqs(sqs_given)
     pos_data = get_all_possible_pos(sqs)
-    print('make_choice_pos_data:', pos_data)
+    # print('make_choice_pos_data:', pos_data)
     evaluate_full_situation(sqs, pos_data)
     all_highest = get_all_highest(pos_data)
     return choice(all_highest)
